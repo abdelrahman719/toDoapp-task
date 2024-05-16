@@ -1,0 +1,27 @@
+<div class="container-md my-5 d-flex h-90vh flex-column justify-content-center align-items-center">
+    <div class=" warning-border bg-warning100 w-75 text-center">
+    
+        <h3 class="my-3 title1 text-warning700  ">Welcome abroad</h3>
+        <form (ngSubmit)="register()" class="px-5 py-5 " [formGroup]="registerForm">
+            <div class="my-5">
+    
+                <p-floatLabel>
+                    <input id="username" type="text" pInputText formControlName="name" />
+                    <label for="username">Unique user name</label>
+                </p-floatLabel>
+            </div>
+            <div class="my-5">
+    
+                <p-floatLabel>
+                    <p-password    id="password" formControlName="password"  [toggleMask]="true" />
+                
+                    <label for="password">Password</label>
+                </p-floatLabel>
+            </div>
+            <p-button [disabled]="this.registerForm.invalid" [raised]="true" severity="contrast" [outlined]="true" class="my-3" label="Sign up" type="submit" />
+        </form>
+        <div class="text-end">
+            <a class="font16  text-warning700" [routerLink]="['/']">Login ?</a>
+        </div>
+    </div>
+    </div>
