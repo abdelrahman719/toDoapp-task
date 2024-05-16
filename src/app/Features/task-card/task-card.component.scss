@@ -8,3 +8,14 @@
     }
 }
 }
+.icon{
+ 
+    &:hover{
+        cursor: pointer;
+        path{
+            
+            fill: var(--primary700);
+           
+        }
+     }
+}

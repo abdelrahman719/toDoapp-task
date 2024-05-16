@@ -6,7 +6,8 @@
 
 * {
     box-sizing: border-box;
-    // font-size: max(calc(1px + 0.5vw), 10px);
+    font-family: 'Poppins' ;
+ 
 }
 
 
@@ -16,9 +17,16 @@ body {
     margin: 0;
    // font-size: calc(3px + 0.4vw);
    // font-size: 10px;
- font-size: max(calc(4px + 0.4vw), 10px);
+ font-size: max(calc(4px + 0.3vw), 9px);
+ color: var(--textColor);
     font-family: sans-serif;
 }
+
+@font-face {
+    font-family: "Poppins";
+    src: url("../.../../src/assets/fonts/Poppins-Medium.ttf") format('truetype');
+  
+  }
 
 
 
@@ -29,6 +37,7 @@ body {
     --primary: #2563DC;
     --primary100: #EEF2FC;
     --primary200: #CAD9F6;
+    --primary500: #2563DC;
     --primary700: #14367B;
     --Neutral200:  #FFFFFF;
     --Neutral600: #5C5C5C;
@@ -37,7 +46,7 @@ body {
     --Warning700: #8F4F00;
     --Error100: #FDF0EC;
     --Error200: #FAD0C6;
-    --Error700: #FAD0C6;
+    --Error700: #81290E;
 
 
 
@@ -103,9 +112,10 @@ body {
 @mixin button {
     border: none;
     border-radius: .8rem;
-    padding: 1.6rem 3.2rem 1.6rem 3.2rem;
+    padding: 1rem 3rem 1rem 3rem;
     margin: 0 .1rem;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    font-weight: 500;
 }
 
 .primary-btn {
@@ -142,9 +152,31 @@ body {
     transition: background-color 0.3s ease;
 
     &:hover {
-        background-color: var(--primary700);
-        color: var(--primary100);
-        border: solid 1px var(--primary100);
+        background-color: var(--primary500);
+        color: #FFFFFF;
+        border: solid 1px var(--primary500);
+        cursor: pointer !important;
+
+    }
+
+    &:disabled {
+        opacity: .5;
+        pointer-events: none;
+    }
+}
+.danger-btn-light {
+
+
+    background-color: var(--Error200);
+    color: var(--Error700);
+    @include button();
+
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: var(--Error700);
+        color: #FFFFFF;
+        border: solid 1px var(--Error700);
         cursor: pointer !important;
 
     }
@@ -186,7 +218,10 @@ body {
 }
 .p-inputtext{
     width: 100%;
-    font-size: 2rem;
+    font-size: 1.2rem;
+    color: var(--Neutral600);
+    font-weight: 400;
+    line-height: 19.5px;
 }
 .p-password{
     width: 100%;

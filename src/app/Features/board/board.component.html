@@ -83,7 +83,7 @@
 
   <div class="body my-5 row justify-content-center align-items-start">
     <!-- to do table -->
-    <div class="col1 bg-primay100  text-primary700 primary-border col-3  mx-3">
+    <div  pDroppable (onDrop)="drop('toDo')"class=" drop-column    bg-primay100  text-primary700 primary-border col-3  mx-3 pb-5">
       <div class="title-container d-flex  ">
 
         <div class="icon mx-3">
@@ -92,25 +92,32 @@
               d="M5 3.9375C4.71821 3.9375 4.44796 4.04944 4.2487 4.2487C4.04944 4.44796 3.9375 4.71821 3.9375 5V19C3.9375 19.2818 4.04944 19.552 4.2487 19.7513C4.44796 19.9506 4.71821 20.0625 5 20.0625H19C19.2818 20.0625 19.552 19.9506 19.7513 19.7513C19.9506 19.552 20.0625 19.2818 20.0625 19V5C20.0625 4.71821 19.9506 4.44796 19.7513 4.2487C19.552 4.04944 19.2818 3.9375 19 3.9375H5ZM2.92287 2.92287C3.47376 2.37199 4.22093 2.0625 5 2.0625H19C19.7791 2.0625 20.5262 2.37199 21.0771 2.92287C21.628 3.47376 21.9375 4.22093 21.9375 5V19C21.9375 19.7791 21.628 20.5262 21.0771 21.0771C20.5262 21.628 19.7791 21.9375 19 21.9375H5C4.22093 21.9375 3.47376 21.628 2.92287 21.0771C2.37199 20.5262 2.0625 19.7791 2.0625 19V5C2.0625 4.22093 2.37199 3.47376 2.92287 2.92287Z"
               fill="#14367B" />
           </svg>
-  
+
         </div>
         <h4 class="title2">To do</h4>
       </div>
-      <div class="tasks-container">
-     
+      <div  class="tasks-container">
 
-        <app-task-card (editTaskEmitter)="editTask($event)" [taskDesc]="test"></app-task-card>
-        <app-task-card (editTaskEmitter)="editTask($event)" [taskDesc]="'test'"></app-task-card>
+        @for(task of toDoTasksList; track task.id){
+
+        <app-task-card
+         [taskData]="task"
+         pDraggable 
+         (onDragStart)="dragStart(task)" 
+         (onDragEnd)="dragEnd()"
+         ></app-task-card>
+        }
+
       </div>
 
     </div>
     <!-- in progress table -->
-    <div class="col2 bg-warning100 title2 text-warning700 warning-border col-3  mx-3">
-      <div class="title-container d-flex  " >
+    <div pDroppable (onDrop)="drop('inProgress')"  class=" drop-column  bg-warning100  text-warning700 warning-border col-3  mx-3 pb-5">
+      <div class="title-container d-flex  ">
 
         <div class="icon mx-3">
-  
-          <svg  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
               d="M5.75 7C5.75 6.58579 6.08579 6.25 6.5 6.25H17.5C17.9142 6.25 18.25 6.58579 18.25 7C18.25 7.41421 17.9142 7.75 17.5 7.75H6.5C6.08579 7.75 5.75 7.41421 5.75 7Z"
               fill="#8F4F00" />
@@ -127,15 +134,28 @@
         </div>
         <h4 class="title2">In Progress</h4>
       </div>
+      <div   class="tasks-container" >
+
+        @for(task of inProgressTasksList; track task.id){
+
+          <app-task-card
+         [taskData]="task"
+         pDraggable 
+         (onDragStart)="dragStart(task)" 
+         (onDragEnd)="dragEnd()"
+         ></app-task-card>
+        }
+
+      </div>
 
     </div>
     <!-- done table -->
-    <div class="col3 bg-error100 title2 text-error700 error-border col-3  mx-3">
+    <div pDroppable (onDrop)="drop('done')" class=" drop-column  bg-error100  text-error700 error-border col-3  mx-3 pb-5">
       <div class="title-container d-flex  ">
-        
+
         <div class="icon mx-3">
-  
-          <svg  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd"
               d="M5 3.75C4.66848 3.75 4.35054 3.8817 4.11612 4.11612C3.8817 4.35054 3.75 4.66848 3.75 5V19C3.75 19.3315 3.8817 19.6495 4.11612 19.8839C4.35054 20.1183 4.66848 20.25 5 20.25H19C19.3315 20.25 19.6495 20.1183 19.8839 19.8839C20.1183 19.6495 20.25 19.3315 20.25 19V5C20.25 4.66848 20.1183 4.35054 19.8839 4.11612C19.6495 3.8817 19.3315 3.75 19 3.75H5ZM3.05546 3.05546C3.57118 2.53973 4.27065 2.25 5 2.25H19C19.7293 2.25 20.4288 2.53973 20.9445 3.05546C21.4603 3.57118 21.75 4.27065 21.75 5V19C21.75 19.7293 21.4603 20.4288 20.9445 20.9445C20.4288 21.4603 19.7293 21.75 19 21.75H5C4.27065 21.75 3.57118 21.4603 3.05546 20.9445C2.53973 20.4288 2.25 19.7293 2.25 19V5C2.25 4.27065 2.53973 3.57118 3.05546 3.05546Z"
               fill="#81290E" />
@@ -145,6 +165,19 @@
           </svg>
         </div>
         <h4 class="title2">Done</h4>
+      </div>
+      <div  class="tasks-container">
+
+        @for(task of doneTasksList; track task.id){
+
+          <app-task-card
+          [taskData]="task"
+          pDraggable 
+          (onDragStart)="dragStart(task)" 
+          (onDragEnd)="dragEnd()"
+          ></app-task-card>
+        }
+
       </div>
 
     </div>

@@ -1,6 +1,58 @@
-.side-bar{
+.side-bar {
     height: 100vh;
     border-right: 1px solid #EFEFEF;
     min-width: 250px;
- 
+
+    .top {
+        .primary-btn-light .icon {
+            path {
+
+                fill: var(--primary700);
+
+            }
+          
+        }
+        .primary-btn-light:hover{
+            .icon{
+
+                path {
+    
+                    fill:#FFFFFF;
+    
+                }
+            }
+        }
+        .primary-btn:hover{
+            .icon{
+
+                path {
+    
+                    fill: var(--primary500);
+    
+                }
+            }
+        }
+    }
+    .bottom {
+        .danger-btn-light .icon {
+            path {
+
+                fill: var(--Error700);
+
+            }
+          
+        }
+        .danger-btn-light:hover{
+            .icon{
+
+                path {
+    
+                    fill:#FFFFFF;
+    
+                }
+            }
+        }
+   
+    }
+
 }

@@ -15,14 +15,13 @@ export class AuthService {
 
   findUserByNameAndPassword(usersList: user[], userName: string, userPassword: string) {
     const user = usersList.find(user => user.name === userName);
-    console.log(user)
     if(user){
 
       if ( user.password === userPassword) {
-        console.log(user)
+     
         return user;
       } else {
-        console.log(user, "wrong")
+       
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Wrong password' });
         return false;
       }
@@ -32,7 +31,6 @@ export class AuthService {
     }
   }
   getUsers() {
-    console.log(USER_DB)
     return this.http.get<user[]>(USER_DB)
   }
 
@@ -55,7 +53,7 @@ export class AuthService {
       next: (res) => {
         const targetUser: any = res.find(userObj => userObj.name === user.name);
         if (targetUser) {
-          console.log("user excist")
+       
           return
         } else {
 
@@ -76,8 +74,12 @@ export class AuthService {
 
 
   }
+  logOut(){
+    localStorage.removeItem("userData")
+    this.router.navigate(['/','login'])
+  }
 
-  isLoggedIn():boolean | user{
+  getLoggedUser():boolean | user{
     let user = localStorage.getItem('userData')
     if(user){
       return JSON.parse(user)

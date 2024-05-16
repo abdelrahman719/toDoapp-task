@@ -1,5 +1,10 @@
-export interface Tasks {
-    id?:'string',
-    description:'string',
-    assignedDeveloper:'string'
+
+
+export interface Task {
+    id:string,
+    desc:string,
+    userId:string,
+    userName:string,
+    status:'toDo' | 'inProgress' |'done' 
+
 }

@@ -1,7 +1,22 @@
-.board-container{
+.board-container {
 
   border-top: 1px solid #EFEFEF;
   min-width: 1000px;
 
 
+}
+
+:host ::ng-deep {
+  .drop-column {
+    border: 1px solid transparent;
+    transition: border-color .2s;
+    &.p-draggable-enter {
+      border-color: var(--textColor);
+
+    }
+  }
+
+  [pDraggable] {
+    cursor: move;
+  }
 }

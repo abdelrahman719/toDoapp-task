@@ -11,12 +11,10 @@ export class UsersService {
   constructor(private http:HttpClient) { }
 
   getUsers(){
-    console.log(USER_DB)
    return this.http.get<user[]>(USER_DB)
   }
+ 
   deleteUser(userId:string){
-   // let params = new HttpParams
-    //params = params.append("id",userId)
     return this.http.delete(`${USER_DB}/${userId}`)
   }
 }
