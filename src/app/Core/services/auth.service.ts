@@ -23,13 +23,17 @@ export class AuthService {
         return user;
       } else {
         console.log(user, "wrong")
-        this.messageService.add({ severity: 'danger', summary: 'Error', detail: 'Wrong password' });
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Wrong password' });
         return false;
       }
     }else{
-      this.messageService.add({ severity: 'danger', summary: 'Error', detail: 'User not found' });
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'User not found' });
         return false;
     }
+  }
+  getUsers() {
+    console.log(USER_DB)
+    return this.http.get<user[]>(USER_DB)
   }
 
   logIn(loggedUser:user) {
@@ -46,12 +50,6 @@ export class AuthService {
       }
     })
   }
-
-  getUsers() {
-    console.log(USER_DB)
-    return this.http.get<user[]>(USER_DB)
-  }
-
   register(user: user) {
     this.getUsers().subscribe({
       next: (res) => {
@@ -77,6 +75,15 @@ export class AuthService {
 
 
 
+  }
+
+  isLoggedIn():boolean | user{
+    let user = localStorage.getItem('userData')
+    if(user){
+      return JSON.parse(user)
+    }else{
+      return false
+    }
   }
 
 
