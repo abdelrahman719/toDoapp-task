@@ -6,7 +6,7 @@ import { BoardComponent } from '../board/board.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SidebarComponent,SearchInputComponent,BoardComponent],
+  imports: [SidebarComponent,SearchInputComponent,BoardComponent ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

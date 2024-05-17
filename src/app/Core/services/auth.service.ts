@@ -79,12 +79,18 @@ export class AuthService {
     this.router.navigate(['/','login'])
   }
 
-  getLoggedUser():boolean | user{
+  isLoggedUser():boolean {
+    let user = localStorage.getItem('userData')
+    if(user){
+      return true
+    }else{
+      return false
+    }
+  }
+  getLoggedUserData(){
     let user = localStorage.getItem('userData')
     if(user){
       return JSON.parse(user)
-    }else{
-      return false
     }
   }
 

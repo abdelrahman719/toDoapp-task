@@ -8,7 +8,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
   const messageService = inject(MessageService);
-  if(authService.getLoggedUser()){
+  if(authService.isLoggedUser()){
     return true;   
   }else{
     messageService.add({ severity: 'error', summary: 'Error', detail: 'Unautherized user' });

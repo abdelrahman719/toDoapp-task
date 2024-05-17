@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../enviroment/enviroment'
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../interfaces/tasks.interface';
+import { BehaviorSubject } from 'rxjs';
 
 const TASKS_DB = environment.SERVER + 'tasks'
 @Injectable({
   providedIn: 'root'
 })
 export class TasksService {
+  newTaskTrigger$ = new BehaviorSubject<boolean>(false)
 
   constructor(private http: HttpClient) { }
 

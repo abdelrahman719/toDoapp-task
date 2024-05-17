@@ -5,11 +5,15 @@ import { TasksService } from '../../Core/services/tasks.service';
 import { Task } from '../../Core/interfaces/tasks.interface';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from 'primeng/dragdrop';
+import { HeaderComponent } from '../../Shared/components/header/header.component';
+import { AuthService } from '../../Core/services/auth.service';
+import { user } from '../../Core/interfaces/user.interface';
+
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [TaskCardComponent, CommonModule, DragDropModule],
+  imports: [TaskCardComponent, CommonModule, DragDropModule, HeaderComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
@@ -20,33 +24,41 @@ export class BoardComponent implements OnInit {
   inProgressTasksList: Task[] = []
   doneTasksList: Task[] = []
   draggedTask: any;
-  constructor(private usersService: UsersService,
+  constructor(private authService: AuthService,
     private tasksService: TasksService
   ) {
 
   }
 
   ngOnInit(): void {
+    this.tasksService.newTaskTrigger$.subscribe({
+      next: (res) => {
+        if (res) {
+          this.addTask()
+        }
+      }
+    })
     this.getAllTasks()
 
   }
 
+  // get tasks and handle the view
   getAllTasks() {
-    this.toDoTasksList=[]
-    this.inProgressTasksList=[]
-    this.doneTasksList=[]
+    this.toDoTasksList = []
+    this.inProgressTasksList = []
+    this.doneTasksList = []
     this.tasksService.getAllTasks().subscribe({
       next: (res) => {
         this.tasksList = res
         this.tasksList.forEach((task) => {
           if (task.status === 'toDo') {
-            this.toDoTasksList.push(task)
+            this.toDoTasksList.unshift(task)
           }
           else if (task.status == 'inProgress') {
-            this.inProgressTasksList.push(task)
+            this.inProgressTasksList.unshift(task)
           }
           else if (task.status == 'done') {
-            this.doneTasksList.push(task)
+            this.doneTasksList.unshift(task)
 
           }
         })
@@ -66,25 +78,25 @@ export class BoardComponent implements OnInit {
 
   // }
 
-  dragStart(task: Task) {
-    this.draggedTask = task;
-    console.log('this.draggedTask: ', this.draggedTask);
-  }
-
-  drop(targetStatus:"toDo"|'inProgress'|'done') {
-    if (this.draggedTask) {
-      console.log('task changed')
-      this.editTask( this.draggedTask,targetStatus)
-
+  addTask() {
+    let loggedUser = this.authService.getLoggedUserData();
+    if(loggedUser){
+      this.toDoTasksList.unshift({
+        desc:'',
+        userId:loggedUser.id,
+        userName:loggedUser.name,
+        status:"toDo"
+      })
     }
   }
 
-  editTask(taskData:Task , targetStatus:"toDo"|'inProgress'|'done'){
+  // handling drag steps to change task status
+  editTaskStatus(taskData: Task, targetStatus: "toDo" | 'inProgress' | 'done') {
     let tempTask = taskData
     tempTask.status = targetStatus
 
     this.tasksService.editTask(tempTask).subscribe({
-      next:(res)=>{
+      next: (res) => {
         console.log('res: ', res);
         this.getAllTasks()
 
@@ -92,10 +104,23 @@ export class BoardComponent implements OnInit {
     })
   }
 
+  dragStart(task: Task) {
+    this.draggedTask = task;
+    console.log('this.draggedTask: ', this.draggedTask);
+  }
+
+  drop(targetStatus: "toDo" | 'inProgress' | 'done') {
+    if (this.draggedTask) {
+      console.log('task changed')
+      this.editTaskStatus(this.draggedTask, targetStatus)
+
+    }
+  }
 
   dragEnd() {
     this.draggedTask = null;
   }
+
 
 
 
