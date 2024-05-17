@@ -7,11 +7,13 @@ import { Task } from '../../Core/interfaces/tasks.interface';
 import { TasksService } from '../../Core/services/tasks.service';
 import { TooltipModule } from 'primeng/tooltip';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-task-card',
   standalone: true,
-  imports: [InputTextareaModule, ReactiveFormsModule, HandleDescPipe ,TooltipModule ,CommonModule ],
+  imports: [InputTextareaModule, ReactiveFormsModule,
+     HandleDescPipe ,TooltipModule ,CommonModule , TranslateModule],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.scss'
 })
@@ -61,7 +63,6 @@ export class TaskCardComponent implements OnInit {
       }
       this.tasksService.editTask(tempTask).subscribe({
         next:(res)=>{
-          console.log('res: ', res);
           this.editMood = false
           this.taskCardForm.get('desc')?.disable()
   

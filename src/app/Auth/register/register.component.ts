@@ -6,10 +6,12 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../Core/services/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule ,InputTextModule, FloatLabelModule ,ButtonModule,RouterModule ,PasswordModule],
+  imports: [ReactiveFormsModule ,InputTextModule,
+     FloatLabelModule ,ButtonModule,RouterModule ,PasswordModule, TranslateModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })

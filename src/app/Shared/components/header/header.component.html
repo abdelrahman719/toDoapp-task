@@ -1,5 +1,5 @@
 <div class="header mt-5  d-flex justify-content-between ">
-    <h3 class="title1"> Tasks</h3>
+    <h3 class="title1"> {{'TASKS' |translate}}</h3>
     <div class="actions-container d-flex justify-content-center align-items-center">
       <div class="icon mx-3">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,7 +72,22 @@
         </svg>
 
       </div>
-      <button [disabled]="editTrigger" (click)="addTask()" class="primary-btn mx-3">New Task + </button>
+
+      @if(siteLang == 'ar'){
+
+        <span class="mx-3  lang-span " (click)="changeLanguage('en')">
+            English
+        </span>
+        }
+        @if(siteLang == 'en'){
+
+        <span class="mx-3 lang-span " (click)="changeLanguage('ar')">
+            Arabic 
+        </span>
+        }
+      <button [disabled]="editTrigger" (click)="addTask()" class="primary-btn mx-3">
+        {{'NEW_TASK' |translate}} +
+        </button>
 
     </div>
 

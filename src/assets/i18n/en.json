@@ -1,0 +1,20 @@
+
+{
+  "dir":"ltr",
+  "TO_DO":"To do",
+  "IN_PROGRESS":"In progress",
+  "DONE":"Done",
+  "NEW_TASK":"New Task",
+  "SAVE":"Save",
+  "ADD":"Add",
+  "DASHBOARD":"Dashboard",
+  "PROJECTS":"Projects",
+  "TASKS":"Tasks",
+  "CALENDAR":"Calendar",
+  "LOG_OUT":"Log out",
+  "LOG_IN":"Log in",
+  "RGISTER":"Register"
+  
+
+}
+

@@ -18,10 +18,10 @@
                 <label for="password">Password</label>
             </p-floatLabel>
         </div>
-        <p-button [disabled]="this.loginForm.invalid" [raised]="true" class="my-3" label="Log in" type="submit" />
+        <p-button [disabled]="this.loginForm.invalid" [raised]="true" class="my-3" [label]="'LOG_IN' | translate" type="submit" />
     </form>
     <div class="text-end">
-        <a class="font16 text-primary700" [routerLink]="['/','signup']">New Developer ?</a>
+        <a class="font16 text-primary700" [routerLink]="['/','signup']">New Developer </a>
     </div>
 </div>
 </div>

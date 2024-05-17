@@ -13,6 +13,7 @@ const TASKS_DB = environment.SERVER + 'tasks'
 })
 export class TasksService {
   newTaskTrigger$ = new BehaviorSubject<boolean>(false)
+  inputSearch$ = new BehaviorSubject<string>('')
 
   constructor(private http: HttpClient , private store: Store<AppState>) { }
 

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "frontendEcommerce": {
+    "toDoApp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -63,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "frontendEcommerce:build:production"
+              "buildTarget": "toDoApp:build:production"
             },
             "development": {
-              "buildTarget": "frontendEcommerce:build:development"
+              "buildTarget": "toDoApp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "frontendEcommerce:build"
+            "buildTarget": "toDoApp:build"
           }
         },
         "test": {

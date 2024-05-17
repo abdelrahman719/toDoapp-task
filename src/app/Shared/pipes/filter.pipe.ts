@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { user } from '../../Core/interfaces/user.interface';
+import { Task } from '../../Core/interfaces/tasks.interface';
 
 @Pipe({
   name: 'userFilter',
@@ -7,14 +7,12 @@ import { user } from '../../Core/interfaces/user.interface';
 })
 export class UserFilterPipe implements PipeTransform {
 
-  transform(users: user[], searchTerm: string): user[] {
-    if (!users) return [];
-    if (!searchTerm) return users;
+  transform(tasks: Task[], searchTerm: string): Task[] {
+    if (!tasks) return [];
+    if (!searchTerm) return tasks;
 
     searchTerm = searchTerm.toLowerCase();
-    return users.filter(user =>
-      user.first_name.toLowerCase().includes(searchTerm) ||
-      user.id.toString().includes(searchTerm)
-    );
+     return tasks.filter(task =>
+       task.userName.toLowerCase().includes(searchTerm));
   }
 }

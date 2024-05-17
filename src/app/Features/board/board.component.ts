@@ -1,26 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskCardComponent } from '../task-card/task-card.component';
-import { UsersService } from '../../Core/services/users.service';
 import { TasksService } from '../../Core/services/tasks.service';
 import { Task } from '../../Core/interfaces/tasks.interface';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from 'primeng/dragdrop';
 import { HeaderComponent } from '../../Shared/components/header/header.component';
 import { AuthService } from '../../Core/services/auth.service';
-import { user } from '../../Core/interfaces/user.interface';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../Store/app.state';
+import { TranslateModule } from '@ngx-translate/core';
+import { UserFilterPipe } from '../../Shared/pipes/filter.pipe';
 
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [TaskCardComponent, CommonModule, DragDropModule, HeaderComponent],
+  imports: [TaskCardComponent, CommonModule, DragDropModule, HeaderComponent ,TranslateModule ,UserFilterPipe],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
 export class BoardComponent implements OnInit {
   targetUser: any;
+  searchKey:string=''
   tasksList: Task[] = []
   toDoTasksList: Task[] = []
   inProgressTasksList: Task[] = []
@@ -58,6 +59,15 @@ export class BoardComponent implements OnInit {
 
         }
       })
+    })
+    this.tasksService.inputSearch$.subscribe({
+      next:(res)=>{
+        if(res){   
+   
+          this.searchKey =res
+    
+        }
+      }
     })
     this.getAllTasks()
 

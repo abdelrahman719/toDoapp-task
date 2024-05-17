@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { TasksService } from '../../../Core/services/tasks.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
   editTrigger: boolean = false;
-  constructor(private tasksService: TasksService) {
+  siteLang: string = 'en';
+  constructor(private tasksService: TasksService,
+    private translateService: TranslateService,
+  ) {
 
   }
 
@@ -26,8 +30,22 @@ export class HeaderComponent implements OnInit {
       }
     });
 
+    let lang = localStorage.getItem('siteLang');
+    if (lang) {
+      this.siteLang = lang
+    }
+
+
   }
   addTask() {
     this.tasksService.newTaskTrigger$.next(true)
+  }
+
+  changeLanguage(language: string) {
+
+    localStorage.setItem('siteLang', language);
+    this.translateService.use(language);
+    this.siteLang = language;
+
   }
 }

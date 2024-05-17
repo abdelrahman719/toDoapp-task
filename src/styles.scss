@@ -1,7 +1,8 @@
-@layer bootstrap, primeng;
+@layer bootstrap, primeng ;
 @import "bootstrap/scss/bootstrap.scss" layer(bootstrap);
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.min.css";
+@import "primeicons/primeicons.css";
 
 
 * {
@@ -27,7 +28,13 @@ body {
     src: url("../.../../src/assets/fonts/Poppins-Medium.ttf") format('truetype');
   
   }
-
+  .rtl {
+    direction: rtl;
+  }
+  .ltr {
+    direction: ltr;
+  
+  }
 
 
 

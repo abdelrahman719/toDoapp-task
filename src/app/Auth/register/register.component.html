@@ -18,10 +18,12 @@
                     <label for="password">Password</label>
                 </p-floatLabel>
             </div>
-            <p-button [disabled]="this.registerForm.invalid" [raised]="true" severity="contrast" [outlined]="true" class="my-3" label="Sign up" type="submit" />
+            <p-button [disabled]="this.registerForm.invalid"
+             [raised]="true" severity="contrast" [outlined]="true"
+              class="my-3" [label]="'REGISTER' | translate" type="submit" />
         </form>
         <div class="text-end">
-            <a class="font16  text-warning700" [routerLink]="['/']">Login ?</a>
+            <a class="font16  text-warning700" [routerLink]="['/']">{{ 'LOG_IN' | translate}} </a>
         </div>
     </div>
     </div>

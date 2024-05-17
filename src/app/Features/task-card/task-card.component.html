@@ -43,14 +43,14 @@
             @if(editMood){
 
                 <button [disabled]="this.taskCardForm.invalid" pButton (click)="saveEdit()" class="primary-btn mx-2 edit">
-                  {{taskData.id?'Save':'Add'}} 
+                  {{( taskData.id?'SAVE'  :'ADD') |translate}} 
                 </button>
             }
           
         </div>
 
     </div>
-    <div class="card-body mb-0 mt-3 d-flex justify-content-center">
+    <div class="card-body mb-1 mt-3 d-flex justify-content-center">
 
      
             <textarea [autoResize]="true" rows="3" pInputTextarea formControlName="desc">

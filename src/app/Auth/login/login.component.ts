@@ -6,10 +6,13 @@ import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../Core/services/auth.service';
 import { PasswordModule } from 'primeng/password';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, FloatLabelModule, ButtonModule, RouterModule, PasswordModule],
+  imports: [ReactiveFormsModule, InputTextModule,
+     FloatLabelModule, ButtonModule, RouterModule, PasswordModule,
+    TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
