@@ -12,5 +12,6 @@ Build with last version of angular V17 , NgRx to manage state ,ngx to handle tra
    1 - Login and Registre with autherizations and use gaurds on routes
    2 - Add , edit and delete tasks
    3 - drage and drop to change task status
-   4 - filter tasks by user name
+   4 - search on task 
    5 - translation between arabic and english
+   6 - responsive design but will keep its board design as cols are beside each other like trello app

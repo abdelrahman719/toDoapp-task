@@ -23,13 +23,6 @@
   ],
   "tasks": [
     {
-      "id": "d933",
-      "desc": "fix tooltip design",
-      "userId": "0ab1",
-      "userName": "ali1",
-      "status": "done"
-    },
-    {
       "id": "1cd6",
       "desc": " add transalte",
       "userId": "d935",
@@ -48,7 +41,7 @@
       "desc": "update state",
       "userId": "d934",
       "userName": "sami",
-      "status": "inProgress"
+      "status": "done"
     },
     {
       "id": "a57a",
@@ -56,6 +49,13 @@
       "userId": "d934",
       "userName": "sami",
       "status": "toDo"
+    },
+    {
+      "id": "ac4d",
+      "desc": "add",
+      "userId": "d934",
+      "userName": "sami",
+      "status": "inProgress"
     }
   ]
 }

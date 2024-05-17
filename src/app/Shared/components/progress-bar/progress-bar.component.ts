@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { ProgressBarModule } from 'primeng/progressbar';
 
 import { ToastModule } from 'primeng/toast';
-import { LoaderService } from '../../../Core/services/loader.service';
-import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-progress-bar',
   standalone: true,

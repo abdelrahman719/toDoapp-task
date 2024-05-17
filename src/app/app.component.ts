@@ -8,6 +8,7 @@ import { SearchInputComponent } from './Shared/components/search-input/search-in
 import { ToastModule } from 'primeng/toast';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ProgressBarComponent } from './Shared/components/progress-bar/progress-bar.component';
 
 
 
@@ -18,7 +19,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet , SidebarComponent  ,SearchInputComponent ,ToastModule , TranslateModule],
+  imports: [RouterOutlet , SidebarComponent  ,SearchInputComponent ,ToastModule , TranslateModule ,ProgressBarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [ ],

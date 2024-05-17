@@ -13,6 +13,6 @@ export class UserFilterPipe implements PipeTransform {
 
     searchTerm = searchTerm.toLowerCase();
      return tasks.filter(task =>
-       task.userName.toLowerCase().includes(searchTerm));
+       task.desc.toLowerCase().includes(searchTerm));
   }
 }
