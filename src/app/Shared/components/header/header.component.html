@@ -72,7 +72,7 @@
         </svg>
 
       </div>
-      <button (click)="addTask()" class="primary-btn mx-3">New Task + </button>
+      <button [disabled]="editTrigger" (click)="addTask()" class="primary-btn mx-3">New Task + </button>
 
     </div>
 

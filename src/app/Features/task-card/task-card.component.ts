@@ -48,11 +48,17 @@ export class TaskCardComponent implements OnInit {
   editTask() {
     this.editMood = true
     this.taskCardForm.get('desc')?.enable()
+   
   }
   saveEdit(){
-    let tempTask = this.taskData
-    tempTask.desc = this.taskCardForm.value.desc
-    if(tempTask.id){
+    if(this.taskData.id){
+      let tempTask = {
+        id:this.taskData.id,
+        desc: this.taskCardForm.value.desc,
+        userId: this.taskData.userId,
+        userName: this.taskData.userName,
+        status: this.taskData.status,
+      }
       this.tasksService.editTask(tempTask).subscribe({
         next:(res)=>{
           console.log('res: ', res);
@@ -62,26 +68,21 @@ export class TaskCardComponent implements OnInit {
         }
       })
     }else{
-      this.tasksService.newTask(tempTask).subscribe({
-        next:(res)=>{
-          console.log('res: ', res);
-          window.location.reload()
-  
-        }
-      })
+      let tempTask = {
+        desc: this.taskCardForm.value.desc,
+        userId: this.taskData.userId,
+        userName: this.taskData.userName,
+        status: this.taskData.status,
+      }
+      this.tasksService.newTask(tempTask);
+      this.tasksService.newTaskTrigger$.next(false)
     }
 
   }
   deleteTask(){
     if(this.taskData.id){
-
-      this.tasksService.deleteTask(this.taskData.id).subscribe({
-        next:(res)=>{
-          console.log('res: ', res);
-          window.location.reload()
-  
-        }
-      })
+      debugger
+      this.tasksService.deleteTask(this.taskData.id)
     }
   }
 

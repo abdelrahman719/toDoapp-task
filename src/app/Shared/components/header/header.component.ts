@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TasksService } from '../../../Core/services/tasks.service';
 
 @Component({
@@ -8,13 +8,26 @@ import { TasksService } from '../../../Core/services/tasks.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
-constructor(private tasksService:TasksService){
+export class HeaderComponent implements OnInit {
+  editTrigger: boolean = false;
+  constructor(private tasksService: TasksService) {
 
-}
+  }
 
+  ngOnInit(): void {
+    this.tasksService.newTaskTrigger$.subscribe({
+      next: (res) => {
 
-  addTask(){
-this.tasksService.newTaskTrigger$.next(true)
+        if (res) {
+          this.editTrigger = true
+        } else {
+          this.editTrigger = false
+        }
+      }
+    });
+
+  }
+  addTask() {
+    this.tasksService.newTaskTrigger$.next(true)
   }
 }

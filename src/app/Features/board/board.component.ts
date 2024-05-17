@@ -8,6 +8,8 @@ import { DragDropModule } from 'primeng/dragdrop';
 import { HeaderComponent } from '../../Shared/components/header/header.component';
 import { AuthService } from '../../Core/services/auth.service';
 import { user } from '../../Core/interfaces/user.interface';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../Store/app.state';
 
 
 @Component({
@@ -25,7 +27,8 @@ export class BoardComponent implements OnInit {
   doneTasksList: Task[] = []
   draggedTask: any;
   constructor(private authService: AuthService,
-    private tasksService: TasksService
+    private tasksService: TasksService,
+    private store: Store<AppState>
   ) {
 
   }
@@ -37,6 +40,24 @@ export class BoardComponent implements OnInit {
           this.addTask()
         }
       }
+    });
+    this.store.select('tasks').subscribe((tasks) => {
+      this.toDoTasksList = []
+      this.inProgressTasksList = []
+      this.doneTasksList = []
+      this.tasksList = tasks['tasks']
+      this.tasksList.forEach((task) => {
+        if (task.status === 'toDo') {
+          this.toDoTasksList.unshift(task)
+        }
+        else if (task.status == 'inProgress') {
+          this.inProgressTasksList.unshift(task)
+        }
+        else if (task.status == 'done') {
+          this.doneTasksList.unshift(task)
+
+        }
+      })
     })
     this.getAllTasks()
 
@@ -44,28 +65,7 @@ export class BoardComponent implements OnInit {
 
   // get tasks and handle the view
   getAllTasks() {
-    this.toDoTasksList = []
-    this.inProgressTasksList = []
-    this.doneTasksList = []
-    this.tasksService.getAllTasks().subscribe({
-      next: (res) => {
-        this.tasksList = res
-        this.tasksList.forEach((task) => {
-          if (task.status === 'toDo') {
-            this.toDoTasksList.unshift(task)
-          }
-          else if (task.status == 'inProgress') {
-            this.inProgressTasksList.unshift(task)
-          }
-          else if (task.status == 'done') {
-            this.doneTasksList.unshift(task)
-
-          }
-        })
-
-
-      }
-    })
+    this.tasksService.getAllTasks()
   }
 
 
@@ -80,21 +80,28 @@ export class BoardComponent implements OnInit {
 
   addTask() {
     let loggedUser = this.authService.getLoggedUserData();
-    if(loggedUser){
+    if (loggedUser) {
       this.toDoTasksList.unshift({
-        desc:'',
-        userId:loggedUser.id,
-        userName:loggedUser.name,
-        status:"toDo"
+        desc: '',
+        userId: loggedUser.id,
+        userName: loggedUser.name,
+        status: "toDo"
       })
+  
     }
   }
 
   // handling drag steps to change task status
   editTaskStatus(taskData: Task, targetStatus: "toDo" | 'inProgress' | 'done') {
-    let tempTask = taskData
-    tempTask.status = targetStatus
 
+  
+    let  tempTask = {
+      id:taskData.id,
+      desc: taskData.desc,
+      userId: taskData.userId,
+      userName: taskData.userName,
+      status: targetStatus,
+    }
     this.tasksService.editTask(tempTask).subscribe({
       next: (res) => {
         console.log('res: ', res);
