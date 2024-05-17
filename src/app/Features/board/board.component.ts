@@ -31,7 +31,7 @@ export class BoardComponent implements OnInit {
     private tasksService: TasksService,
     private store: Store<AppState>
   ) {
-
+    this.tasksService.inputSearch$.next('')
   }
 
   ngOnInit(): void {

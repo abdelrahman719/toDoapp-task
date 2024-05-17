@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   constructor(private tasksService: TasksService,
     private translateService: TranslateService,
   ) {
-
+    this.tasksService.newTaskTrigger$.next(false)
   }
 
   ngOnInit(): void {
