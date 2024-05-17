@@ -61,12 +61,8 @@ export class BoardComponent implements OnInit {
       })
     })
     this.tasksService.inputSearch$.subscribe({
-      next:(res)=>{
-        if(res){   
-   
+      next:(res)=>{  
           this.searchKey =res
-    
-        }
       }
     })
     this.getAllTasks()
@@ -77,16 +73,6 @@ export class BoardComponent implements OnInit {
   getAllTasks() {
     this.tasksService.getAllTasks()
   }
-
-
-  // getUserById(userId: string) {
-  //   this.usersService.getUsers().subscribe({
-  //     next: (res) => {
-  //       this.targetUser = res.find(userObj => userObj.id == userId);
-  //     }
-  //   })
-
-  // }
 
   addTask() {
     let loggedUser = this.authService.getLoggedUserData();
@@ -137,6 +123,7 @@ export class BoardComponent implements OnInit {
   dragEnd() {
     this.draggedTask = null;
   }
+
 
 
 

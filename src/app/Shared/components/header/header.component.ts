@@ -48,4 +48,6 @@ export class HeaderComponent implements OnInit {
     this.siteLang = language;
 
   }
+
+
 }

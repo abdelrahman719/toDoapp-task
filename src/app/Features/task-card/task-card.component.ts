@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { HandleDescPipe } from '../../Shared/pipes/handle-desc.pipe';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
@@ -86,6 +86,8 @@ export class TaskCardComponent implements OnInit {
       this.tasksService.deleteTask(this.taskData.id)
     }
   }
+
+
 
 
 }
